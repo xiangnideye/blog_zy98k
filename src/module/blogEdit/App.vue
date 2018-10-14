@@ -6,6 +6,16 @@
                 <input type="text" class="blog_input" v-model="titleVal">
             </div>
             <div class="form_item">
+                 <el-select v-model="blogValue" placeholder="请选择">
+                    <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                    </el-option>
+                </el-select>
+            </div>
+            <div class="form_item">
                 <quill-editor v-model="myQuillEditor"
                     ref="myQuillEditor"
                     :options="editorOption">
@@ -26,16 +36,31 @@
             return {
                 titleVal:'',
                 myQuillEditor:'',
+                options: [{
+                    value: '1',
+                    label: 'HTML'
+                    }, {
+                    value: '2',
+                    label: 'CSS'
+                    }, {
+                    value: '3',
+                    label: 'JS'
+                    }, {
+                    value: '4',
+                    label: 'NODE'
+                }],
+                blogValue: ''
             }
         },
         methods :{
             button_confirm () {
-                console.log(this.titleVal);
-                console.log(this.myQuillEditor)
+               
                 this.$http.post('http://localhost:9000/postBlogData',{
                     blogTitle:this.titleVal,
-                    content:this.myQuillEditor
+                    content:this.myQuillEditor,
+                    blogValue:this.blogValue
                 },{emulateJSON:true}).then((response)=>{
+                    // if(response)
                     console.log(response)
                 })
             }

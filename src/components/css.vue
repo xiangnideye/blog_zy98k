@@ -24,11 +24,11 @@
 <style lang="less">
     .css_body{
         position: absolute;
-        top:150px;
+        top:100px;
         width: 100%;
         max-width: 1000px;
         margin: 0px auto;
-        background-color: #fff; 
+        // background-color: #fff; 
     }
 </style>
 
