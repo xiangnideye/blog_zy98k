@@ -55,7 +55,7 @@
         methods :{
             button_confirm () {
                
-                this.$http.post('http://localhost:9000/postBlogData',{
+                this.$http.post('www.zy98k.com/postBlogData',{
                     blogTitle:this.titleVal,
                     content:this.myQuillEditor,
                     blogValue:this.blogValue

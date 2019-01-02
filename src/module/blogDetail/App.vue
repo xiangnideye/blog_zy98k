@@ -3,37 +3,51 @@
         <div class="blog_detail_nav">
             <a class="detail_nav_title">前端菜鸟</a>
         </div>
-        <div class="blog_content" v-html="">
+        <div class="blog_detail_body">
+            <div class="blog_detail_title">{{blogTitle}}</div>
+            <div class="blog_content" v-html="blogContent">
 
+            </div>
         </div>
+        
     </div>
 </template>
 
 <script>
-    export default {
-        data () {
-            return {
-
-            }
-        },
-        mounted () {
-            const blogId = this.getQueryString('_id');
-            const tableId = this.getQueryString('tab_id');
-            console.log(blogId)
-            this.$http.get('http://localhost:9000/getBlogDetail?id='+blogId+'&tableId='+tableId).then((res)=>{
+import  '../../common/css/reset.css'
+export default { 
+    data () {
+        return {
+            blogId: '',
+            tableId: '',
+            blogTitle: '',
+            blogContent: '',
+        }
+    },
+    mounted () {
+        this.blogId = this.getQueryString('_id');
+        this.tableId = this.getQueryString('tab_id');
+        this.getBlogDetail();
+    },
+    methods : {
+        getBlogDetail () {
+            this.$http.get('www.zy98k.com/getBlogDetail?id=' + this.blogId + '&tableId=' + this.tableId).then((res)=>{
                 console.log(res.body)
+                if (res.body.error_code == 200) {
+                    this.blogTitle = res.body.successObj.title;
+                    this.blogContent = res.body.successObj.content;
+                }
+                
             })
         },
-        methods : {
-            getQueryString (name) {
-                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-                var r = window.location.search.substr(1).match(reg);
-                if (r != null) return unescape(r[2]); return null;
-            }
+        getQueryString (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
         }
     }
+}
 </script>
-    
 
 <style lang="less">
     .blog_detail {
@@ -53,11 +67,24 @@
                 // 
             }
         }
-        .blog_content{
+        .blog_detail_body{
             overflow: hidden;
             width: 690px;
             margin: 0 auto;
+            .blog_detail_title{
+                font-weight: 600;
+                font-synthesis: style;
+                font-size: 24px;
+                margin: 24px 0;
+                word-wrap: break-word;
+            }
+            .blog_content{
+                overflow: hidden;
+                width: 690px;
+                margin: 0 auto;
+            }
         }
+        
     }
 </style>
 

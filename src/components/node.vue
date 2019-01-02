@@ -1,18 +1,26 @@
 <template>
-    <h1></h1>
+    <div class="css_body">
+        <v-htmlTemplate :listId=4></v-htmlTemplate>
+    </div>
 </template>
 
 <script>
+    import htmlTemplate from './htmlTemplate'
     export default {
+        data () {
+            return {
+            
+            }
+        },
+        components:{
+            'v-htmlTemplate':htmlTemplate
+        },
         mounted () {
-            this.$http.get('http://localhost:9000/getList?id=4').then((response)=>{
-                console.log(response.body)
-            })
+            
         }
     }
 
 </script>
-
 <style lang="less">
-   
+    
 </style>

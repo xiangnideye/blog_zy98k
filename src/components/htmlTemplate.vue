@@ -4,7 +4,7 @@
             <li class="blog_item" v-for="(item,index) in blogList" :key="index">
                 <div class="blog_left_content">
                     <a class="left_title" @click="enterBlogDetail(item)">{{item.title}}</a>
-                    <span class="left_introduction">{{item.content}}</span>
+                    <span class="left_introduction" v-html="item.content"></span>
                     <span class="left_border"></span>
                     <span class="left_time">{{item.time}}</span>
                 </div>
@@ -32,7 +32,7 @@
         mounted () {
             let ran_ = Date.parse(new Date());
 
-            this.$http.get('http://localhost:9000/getList?id='+this.listId+'&ran_='+ran_).then((response)=>{
+            this.$http.get('http://localhost:8000/getList?id='+this.listId+'&ran_='+ran_).then((response)=>{
                 this.blogList = response.body;
                 console.log(response.body)
             })
