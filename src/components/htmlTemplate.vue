@@ -32,7 +32,7 @@
         mounted () {
             let ran_ = Date.parse(new Date());
 
-            this.$http.get('http://localhost:8000/getList?id='+this.listId+'&ran_='+ran_).then((response)=>{
+            this.$http.get('http://www.zy98k.com/getList?id='+this.listId+'&ran_='+ran_).then((response)=>{
                 this.blogList = response.body;
                 console.log(response.body)
             })
